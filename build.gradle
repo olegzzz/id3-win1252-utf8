@@ -1,0 +1,42 @@
+buildscript{
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+    }
+}
+
+plugins {
+    id "com.github.hierynomus.license" version "0.14.0"
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    jcenter()
+    maven {
+        url "https://dl.bintray.com/ijabz/maven"
+    }
+}
+
+dependencies {
+    compile 'net.jthink:jaudiotagger:2.2.5'
+    compile 'org.apache.logging.log4j:log4j-api:2.9.1'
+    compile 'org.apache.logging.log4j:log4j-core:2.9.1'
+    compile 'commons-cli:commons-cli:1.4'
+    compile 'commons-io:commons-io:2.6'
+
+    // To avoid compiler warnings about @API annotations in JUnit code.
+    testCompile('org.apiguardian:apiguardian-api:1.0.0')
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.2'
+    testCompile 'org.junit.jupiter:junit-jupiter-params:5.0.2'
+    testCompile 'org.mockito:mockito-core:2.12.0'
+
+
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.2'
+}
+
+compileJava.dependsOn licenseFormat
+
+mainClassName = 'io.github.olegzzz.id3.App'
+
